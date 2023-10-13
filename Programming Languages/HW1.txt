@@ -1,0 +1,42 @@
+1.1a) 
+int main(){
+   double 3pi = 3.14;
+   cout << 3pi << endl;
+   return 0;
+} 
+
+// In this c++ program, a lexical error occurs 
+// because identifiers cannot start with numbers.
+
+1.1b) 
+int main()
+   cout << "Hello, world!" << endl;
+   return 0;
+
+// In this c++ program, a syntax error occurs 
+// because the parser expects braces for the function definition
+
+1.1c) 
+#include <iostream>
+
+int main() {
+   int x = 5;
+    
+   cout << x + y << endl; // this line contains static semantic error
+   return 0;
+}
+
+// In this c++ program, a static semantic error occurs 
+// because y is not previously declared
+
+1.1d)
+int main() {
+   int x = 3/0; // this line contains dynamic semantic error
+   cout << x << endl; 
+}
+
+// In this c++ program, a dynaic error occurs
+// because an index out of bound exception occurs at compile time
+
+1.15) 
+Considering Microsoft originally attempted a "Microsoft Java Virtual Machine" in attempts to introduce its own version of Java (resulting in legal action against the company), I believe C# was certainly created in attempt to undermine Java. Of course, they have their own capabilities, but the point is that C# emerged as a direct result to legal action being taken against Microsoft for deriving their own Java charactersitics during the JVM implementation across platforms. At this point, they certainly have unique capabilities and are good for different purposes so it is hard to "choose a side," but I do not think Microsoft stood in good merit at that point in time.
