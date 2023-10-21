@@ -1,0 +1,21 @@
+{
+  "name": "fullstack-vue-express",
+  "version": "1.0.0",
+  "description": "Followed traversy media youtube vid to create a small application using Vue, Express and MongoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "author": "Emma Smith",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongodb": "^6.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
