@@ -1,0 +1,6 @@
+#lang scheme
+
+(define (myif x y z) (if x y z))
+;(myif (null? '()) 0 (/ 3 0))
+
+(delay (+ 3 5))
