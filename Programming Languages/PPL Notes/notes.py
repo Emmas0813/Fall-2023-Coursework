@@ -16,3 +16,6 @@ def f():
 
 f()
 
+x = (1, 3, "littlerock")
+print (x)
+# cannot add anything to a 'tuple'
