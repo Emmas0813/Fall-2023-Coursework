@@ -1,0 +1,82 @@
+ORG 10 // Start at address 10
+
+/ get first char --------------------------------------
+FST, SKI 	// Look for input
+BUN FST 	// No input
+CLA 		// clear AC
+INP 		// input first digit to AC
+ADD HEXCHECK // subtract 40 to determine if digit or letter
+SPA 		// skip next line if result is positive
+ADD CONVERTDIGIT // subtract 30 to get decimal value of hex digit
+SNA 		// skip next line if result is negative
+ADD CONVERTLETTER // subtract 31 to get decimal value of hex letter
+ADD HEXRTRN  // add 40 to get positive value of decimal result
+STA MSB 	// store in MSB
+
+/ get second char --------------------------------------
+SND, SKI 	// Look for input
+BUN SND	// No input
+CLA 		// clear AC
+INP 		// input first digit to AC
+ADD HEXCHECK // subtract 40 to determine if digit or letter
+SPA 		// skip next line if result is positive
+ADD CONVERTDIGIT // subtract 30 to get decimal value of hex digit
+SNA 		// skip next line if result is negative
+ADD CONVERTLETTER // subtract 31 to get decimal value of hex letter
+ADD HEXRTRN 	// add 40 to get positive value of decimal result
+STA LSB 	// store in MSB
+
+/ initialize multiplying factor -------------------------
+CLA 		// clear AC contents
+LDA MULTPLR  // load multiplying factor onto AC
+ADD MSB 	// initialize multiplier to initial MSB value
+STA MULTPLR 	// store multiplier
+
+/ convert to decimal -------------------------------------
+MULT, CLA 		// clear AC contents
+      LDA DECR 	// Load decrementor to AC
+      ADD SUB 	// subtract 1
+      STA DECR 	// store decremented value, including carry flag
+
+      LDA MSB 	// load MSB value
+      ADD MULTPLR 	// Add multiplier
+      STA MSB 	// store msb
+
+      CLA 		// clear AC contents
+      LDA DECR 	// load decremented value with carry flag
+      SZA 		// break loop if result decrementor is 0
+      BUN MULT 	// branch to MULT if DECR is not zero
+
+LDA MSB 	  // load the result of MSB * 16^1
+ADD LSB	  // add the result of MSB * 16^0
+STA DECIMALVAL // store decimal value
+
+
+
+
+/ variables
+MSB, DEC 0   		// MSB of hex input
+LSB, DEC 0   		// LSB of hex input
+DECIMALVAL, DEC 0   // Result value
+MULTPLR, DEC 0 	// stores the factor for multiplication
+DIGIT1, DEC 0
+DIGIT2, DEC 0
+DIGIT3, DEC 0
+QUOTIENT2, DEC 0
+TEMP, DEC 0
+LARGESTDIGIT, DEC 0
+
+/ CONSTANTS
+CONVERTLETTER, HEX -31 // Convert from ASCII hex letter to decimal
+CONVERTDIGIT, HEX -30  // Convert from ASCII hex digit to decimal
+DECR, HEX 15           // used for while loop
+SUB, HEX -1            // used for decrementing
+HEXCHECK, HEX -40      // used to see if value is positive or negative to determine if letter or digit
+HEXRTRN, HEX 40        // return original value before check
+CHECKDGTS, HEX -100    // check if there are two digits or three digits in decimal result
+RETURNDEC, HEX 100     // after checking digits, add back to original value
+DISPLAY, HEX 30
+2DIGITSCHK, HEX -10
+ASCII, HEX 11
+
+END, HLT // Stop program

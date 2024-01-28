@@ -1,0 +1,14 @@
+#lang scheme
+
+(car '(cdr '(car (cdr ( OU OSU)))))
+; ((cdr (OU OSU)))
+(define pair
+  (cons (car '(1 2)) '(3 4))
+  )
+
+;(display pair)
+
+(define (add-three a b c)
+  (+ a b c))
+
+(define arguments '(1 2 3))

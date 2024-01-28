@@ -1,0 +1,63 @@
+import re
+
+def read_file(file_path):
+    with open(file_path, 'r') as file: # open .txt file in read only mode
+        return file.read() # read and return content of file
+
+def get_student_info(input_data):
+    record = re.compile(r'(\d{9})\s*([A-Za-z]+)\s*([A-Za-z]+)\s*(\d{2})\s([EL])(?:\s[A-Za-z\s]+)?')
+    # capture 9 digits (for ID), match varying amount of whitespace, capture aphabetical letters for first name, 
+    # alphabetical letters for last name, varrying amount of white space, capture 2 digits for score, single space
+    # E or L, and then an optional capturing of address.
+    records = record.findall(input_data) # searches the input string for all non-overlapping matches of the pattern and returns them as a list of tuples.
+    students = [ # create a list of identifiers for the student
+        {
+            'ID': int(match[0]),
+            'First Name': match[1],
+            'Last Name': match[2],
+            'Score': int(match[3]),
+            'Eagerness': match[4]
+        }
+        for match in records # create an identifer for every student 
+    ]
+    return students # return the list of all student identifiers
+
+def assign_grades(students):
+    students.sort(key=lambda x: (-x['Score'], x['Eagerness'])) # sort students dependent on eager and lazy identficiation
+    n = len(students) # get length of 
+    for i, student in enumerate(students): # for every student, assign a grade
+        if i < n // 3:
+            student['Grade'] = 'A' # top 1/3 students receive an A
+        elif i < 2 * n // 3:
+            student['Grade'] = 'B' # next 1/3 receives a B
+        elif i >= n - (n + 9) // 10:
+            student['Grade'] = 'F' # bottom 10% receive anF
+        else:
+            student['Grade'] = 'C' if student['Eagerness'] == 'E' else 'D' # the rest receive a C if they are eager and D if they are lazy
+
+def create_html_file(students):
+    students.sort(key=lambda x: (x['Last Name'], x['First Name'], x['ID']))
+    html_output = "<html><head><title>Student Grades</title></head><body>" # assign html title
+    html_output += "<table border='1'><tr><th>Last Name</th><th>First Name</th><th>ID</th><th>Grade</th></tr>" # create table
+    for student in students:
+        html_output += f"<tr><td>{student['Last Name']}</td><td>{student['First Name']}</td><td>{student['ID']}</td><td>{student['Grade']}</td></tr>" #populate table
+    html_output += "</table></body></html>" # put finished table into output
+    return html_output
+
+def write_html_to_file(html_output, output_file_path):
+    with open(output_file_path, 'w') as file:
+        file.write(html_output) # create html file with updated table
+
+# Input and Output paths
+input_file = 'input.txt'
+output_file = 'output.html'
+
+# Processing the student records
+input_data = read_file(input_file)
+students = get_student_info(input_data)
+assign_grades(students)
+html_result = create_html_file(students)
+write_html_to_file(html_result, output_file)
+
+# Output the file path
+output_file

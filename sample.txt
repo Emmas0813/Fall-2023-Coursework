@@ -1,0 +1,19 @@
+***********************
+
+/get first char
+FST, SKI // Look for input
+BUN FST // No input
+CLA
+INP
+
+// subtract 40
+// if its positive,
+// subtract 31
+// add 40
+
+
+STA MSB
+HEXCHECK, HEX -40
+HEXRTRN, HEX 40
+
+***********************

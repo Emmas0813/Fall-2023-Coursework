@@ -1,0 +1,126 @@
+ORG 10
+
+/ read and multiply most significant bit by 16 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+BSA READ_HEX  	// Read first ASCII hex character into AC and convert to decimal
+STA MSB       	// Store decimal representaion as most significant bit
+CLA		// Clear AC
+CLE		// Clear E bit
+LDA MSB		// load MSB for multiplication
+CIL		// circulate left to simulate multiplying by 16
+CIL
+CIL
+CIL	
+STA MSB		// store product in MSB
+
+/ read LSB, get sum of LSB and MSB in decimal, then print largest digit 
+
+BSA READ_HEX  	// Read second ASCII hex character into AC and convert to decimal
+ADD MSB         // Add LSB and MSB together
+BSA STORE_DIGITS // store each digit for comparison
+BSA COMPARE_DIGITS // compare digits and find largest
+ADD HEX_THIRTY 	// add thirty to print decimal representation
+OUT 		// output largest decimal
+HLT		// end program
+
+/ FUNCTIONS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/ Read ASCII representation of a hexadecimal and return with the integer equivalent in AC
+READ_HEX, HEX 0 
+	BUN READ 		// read input		
+	ORIG, HEX 0 		// temporary variable used for original hex 
+	READ, SKI		// Look for input
+        	BUN READ   		// continue reading until input found
+       		INP			// store input to AC
+                STA ORIG   		// Save original input value
+        ADD NUMBER_CHECK   	// add -0x3A to AC to check if hex digit is a letter or number
+                         	// if < zero, hex digit is 0-9
+                                // if > zero, hex digit is A-F
+        SNA			// skip next line if digit is a number
+        BUN LETTER      	// Branch to LETTER if hex digit is a letter
+        LDA ORIG        	// Load the original ASCII value into AC
+        ADD CVRT_DIG_TO_DEC	// Convert ASCII number to decimal
+        BUN READ_HEX I		// Return with the integer in AC
+
+LETTER, LDA ORIG		// Load the original ASCII value into AC
+        ADD CVRT_LETTER_TO_DEC 	// Convert ASCII letter to decimal
+        BUN READ_HEX I          // Return with the digit in AC
+
+
+/ find largest digit 
+STORE_DIGITS, HEX 0
+       	STA DIVIDEND 		// store 0 in dividend		
+        LDA NEG_HUNDRED		// load -100 to transfer
+        STA DIVISOR		// initiate divisor to -100
+        BSA CALC_QUOTIENT_AND_REMAINDER //calculate quotient and remainder
+        LDA QUOTIENT		// load quotient from calculation
+        STA DIGIT1		// store quotient as digit1
+        LDA REMAINDER		// load remainder
+        STA DIVIDEND		// store it as new dividend
+        LDA NEG_TEN		// load -10
+        STA DIVISOR		// store as new divisor
+        BSA CALC_QUOTIENT_AND_REMAINDER // calculate quotient and remainder
+        LDA QUOTIENT		// load quotient
+        STA DIGIT2		// store quotient as digit2
+        LDA REMAINDER		// load remainder
+        STA DIGIT3		// store it as digit3
+        BUN STORE_DIGITS I	// return the converted decimal
+
+CALC_QUOTIENT_AND_REMAINDER, HEX 0
+	CLA                                                    
+        STA QUOTIENT   		// Clear quotient
+        LDA DIVIDEND  	
+        STA REMAINDER  		// Store DIVIDEND as the REMAINDER
+	LOOP, LDA DIVIDEND
+        	ADD DIVISOR
+                SPA			// if dividend >= divisor, skip next line
+                BUN CALC_QUOTIENT_AND_REMAINDER I  // otherwise, complete loop again
+                STA DIVIDEND		// Save the result of dividend -= divisor
+                STA REMAINDER		// save the result of remainder
+                LDA QUOTIENT		// load quotient to AC
+                INC			// increment AC
+                STA QUOTIENT		// store incremented result
+                BUN LOOP		// repeat loop until dividend >= divisor
+
+COMPARE_DIGITS, HEX 0
+	BUN LOAD_FIRST
+	LARGEST, HEX 0
+	LOAD_FIRST, LDA DIGIT1		// load first digit
+                CMA			// negate digit 1 for comparison
+                ADD DIGIT2		// add second digit 
+                SNA			// skip next line if digit 1 is bigger than digit 2
+                BUN LOAD_SECOND		// go to save second digit
+                LDA DIGIT1		// load original digit 1
+                STA LARGEST		// set digit 1 as largest digit
+                BUN THIRD_DIGIT	// go to 3 digit check
+LOAD_SECOND, LDA DIGIT2	
+	STA LARGEST // store second digit as largest digit
+THIRD_DIGIT, LDA LARGEST 	// load current largest digit
+	CMA		// negate it
+        ADD DIGIT3	// add digit 3
+        SNA		// skip next line if previous largest is still larger than 3rd digit
+        BUN LOAD_THIRD	// go to return the third digit
+        LDA LARGEST	// otherwise, load largest digit
+        BUN COMPARE_DIGITS I // return the largest digit
+LOAD_THIRD, LDA DIGIT3
+	BUN COMPARE_DIGITS I // return 3rd digit as largest
+
+// VARIABLES ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+MSB, HEX 0   
+DIGIT1, HEX 0
+DIGIT2, HEX 0
+DIGIT3, HEX 0              
+DIVIDEND, HEX 0
+DIVISOR, HEX 0
+QUOTIENT, HEX 0
+REMAINDER, HEX 0
+
+// CONSTANTS ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+CVRT_DIG_TO_DEC, HEX -30 // convert 0-9 to decimal
+CVRT_LETTER_TO_DEC, HEX -37 // A-F to decimal
+NUMBER_CHECK, HEX -3A // Used to see if input is a number
+NEG_TEN, DEC -10
+NEG_HUNDRED, DEC -100
+HEX_THIRTY, HEX 30
+
+END

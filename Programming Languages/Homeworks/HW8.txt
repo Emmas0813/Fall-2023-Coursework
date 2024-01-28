@@ -1,0 +1,9 @@
+8.1) For this array we need at least 20 bytes because elements of char type should be 2 instead of 1 to maintain even addressing. (i.e. 2 + (1 + 1) + 2 + ...) = 20.
+To maintain alignment, 4 bytes must be added to each element in the array because elements of real type must be aligned. So 24 bytes * 10 elements = 240 bytes for the array.
+
+8.12) each entry in A has 4 + 1 = 5 bytes. So, at A[3][7] is located at 1000 + (3 x 10 x 5) + (7 x 5) = address 1185.
+
+8.16) 	double *a[n]; // a is an array of n pointers to doubles
+	double (*b)[n]; // b is a pointer to an array of n doubles
+	double (*c[n])(); // c is an array of n pointers to functions returning doubles
+	double (*d())[n]; // d is a function returning a pointer to an array of n doubles

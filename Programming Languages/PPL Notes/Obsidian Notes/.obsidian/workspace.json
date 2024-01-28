@@ -1,64 +1,35 @@
 {
   "main": {
-    "id": "fc756514701c2c8d",
+    "id": "8bae1dac12fa2d34",
     "type": "split",
     "children": [
       {
-        "id": "0d92081f5d1297b5",
+        "id": "57fc98c17800b8bb",
         "type": "tabs",
         "children": [
           {
-            "id": "882569e79de5f661",
+            "id": "b9c8830af8d910d4",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Obsidian Notes/11-14 Notes.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "033a1a62fe09b3ae",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Obsidian Notes/11-28 Notes.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "1a52ccdd3f0b1c02",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Obsidian Notes/12-5 Notes.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "8b8c4a46d7fa92ba",
+    "id": "ef684edbe9932b4e",
     "type": "split",
     "children": [
       {
-        "id": "f84b0c2ebe266b7a",
+        "id": "67e0fce025c000c5",
         "type": "tabs",
         "children": [
           {
-            "id": "a2a19c82497b9c84",
+            "id": "a45c7327bbeca127",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -68,12 +39,12 @@
             }
           },
           {
-            "id": "f7ae9246c5b3fef8",
+            "id": "4f7e944da768e177",
             "type": "leaf",
             "state": {
               "type": "search",
               "state": {
-                "query": " ",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -83,7 +54,7 @@
             }
           },
           {
-            "id": "93f3560c53b08a5a",
+            "id": "4c0a7d4b0b78d068",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -94,23 +65,22 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 300
   },
   "right": {
-    "id": "18affa9fd04858b0",
+    "id": "a415579ea83a8e58",
     "type": "split",
     "children": [
       {
-        "id": "3c9d9861d9b59a6d",
+        "id": "14acac670db0492c",
         "type": "tabs",
         "children": [
           {
-            "id": "21c7429f7eaaef4a",
+            "id": "58b194571d336287",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Obsidian Notes/11-28 Notes.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,19 +92,18 @@
             }
           },
           {
-            "id": "8400ca72255f92d7",
+            "id": "1d27e45b015ab910",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Obsidian Notes/11-28 Notes.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "0e432c0a4fb7ce5e",
+            "id": "98f597f93a49c266",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -145,13 +114,11 @@
             }
           },
           {
-            "id": "c0069a09bd208c67",
+            "id": "56c8abfa28f37add",
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "Obsidian Notes/11-28 Notes.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -171,37 +138,6 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "033a1a62fe09b3ae",
-  "lastOpenFiles": [
-    "Obsidian Notes/11-14 Notes.md",
-    "Obsidian Notes/11-28 Notes.md",
-    "Obsidian Notes/12-5 Notes.md",
-    "11-14 Notes.pdf",
-    "Obsidian Notes/Final Stuff.md",
-    "11-28 Notes.pdf",
-    "Obsidian Notes/11-2 Notes.md",
-    "11-2 Notes.pdf",
-    "12-5 Notes.pdf",
-    "Obsidian Notes/11-9 Notes.md",
-    "Obsidian Notes/11-7 Notes.md",
-    "Final Stuff.pdf",
-    "11-7 Notes.pdf",
-    "11-7 Notes.md",
-    "Obsidian Notes/10-26 Notes.md",
-    "Obsidian Notes/10-24 Notes.md",
-    "Obsidian Notes",
-    "11-2 Notes.md",
-    "10-26 Notes.pdf",
-    "11-9 Notes.md",
-    "10-26 Notes.md",
-    "Final Stuff.md",
-    "10-24 Notes.md",
-    "12-5 Notes.md",
-    "11-28 Notes.md",
-    "11-14 Notes.md",
-    "study.py",
-    "11-9 Notes.pdf",
-    "Assembly Language Design Document.md",
-    "Untitled.canvas"
-  ]
+  "active": "b9c8830af8d910d4",
+  "lastOpenFiles": []
 }
